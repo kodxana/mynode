@@ -18,7 +18,12 @@
         <div class="app_status">{{ btcpayserver_status }}</div>
         <div class="app_contents">
             {% if product_key_skipped %}
-                Premium Feature
+                {% if lnd_ready %}
+                    {% if btcpayserver_enabled %}
+                    <a class="ui-button ui-widget ui-corner-all mynode_button" href="#" id="btcpayserver">BTCPay Server</a>
+                    {% endif %}
+                    <a class="ui-button ui-widget ui-corner-all mynode_button" href="/toggle-btcpayserver" id="toggle-btcpayserver">{% if btcpayserver_enabled %}Disable{% else %}Enable{% endif %}</a>
+                    {% endif %}
             {% else %}
                 {% if lnd_ready %}
                     {% if btcpayserver_enabled %}
@@ -114,7 +119,14 @@
         <div class="app_status">{{ mempoolspace_status }}</div>
         <div class="app_contents">
             {% if product_key_skipped %}
-                Premium Feature
+                 {% if not is_installing_docker_images %}
+                    {% if mempoolspace_enabled %}
+                        <a class="ui-button ui-widget ui-corner-all mynode_button" href="#" id="mempoolspace">View</a>
+                        <a class="ui-button ui-widget ui-corner-all mynode_button" href="#" id="toggle-mempoolspace">Disable</a>
+                    {% else %}
+                        <a class="ui-button ui-widget ui-corner-all mynode_button" href="#" id="toggle-mempoolspace">Enable</a>
+                    {% endif %}
+                {% endif %}
             {% else %}
                 {% if not is_installing_docker_images %}
                     {% if mempoolspace_enabled %}
